@@ -3,7 +3,8 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-
+use \App\Models\User;
+use \App\Models\Universidad;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\TutorAcademico>
  */
@@ -16,17 +17,17 @@ class TutorAcademicoFactory extends Factory
      */
     public function definition()
     {
-        $users = \App\Models\User::pluck('id')->toArray();
-        $universidad = \App\Models\Universidad::pluck('id')->toArray();
+        // $users = \App\Models\User::pluck('id')->toArray();
+        // $universidad = \App\Models\Universidad::pluck('id')->toArray();
         return [
             //
-            'nombres' => $this->faker->name(),
+            'nombres' => $this->faker->firstName(),
             'apellidos' => $this->faker->lastName(),
             'grado_academico' => $this->faker->randomElement(['Licenciado', 'Magister']),
             'email' => $this->faker->safeEmail(),
             'celular' => $this->faker->numerify('########'),
-            'id_user' => \App\Models\User::factory(),
-            'id_universidad' => \App\Models\Universidad::factory(),
+            'id_user' => User::factory(),
+            'id_universidad' => Universidad::factory(),
 
             // 'id_user' => function (array $attributes) {
             //     return \App\Models\User::find($attributes['id'])->type;
