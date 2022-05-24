@@ -25,8 +25,18 @@ class TutorAcademicoFactory extends Factory
             'grado_academico' => $this->faker->randomElement(['Licenciado', 'Magister']),
             'email' => $this->faker->safeEmail(),
             'celular' => $this->faker->numerify('########'),
-            'id_user' => $this->faker->shuffle($users),
-            'id_universidad' => $this->faker->shuffle($universidad),
+            'id_user' => \App\Models\User::factory(),
+            'id_universidad' => \App\Models\Universidad::factory(),
+
+            // 'id_user' => function (array $attributes) {
+            //     return \App\Models\User::find($attributes['id'])->type;
+            // },
+            // 'id_universidad' => function (array $attributes) {
+            //     return \App\Models\Universidad::find($attributes['id'])->type;
+            // },
+
+            // 'id_user' => $this->faker->shuffle($users),
+            // 'id_universidad' => $this->faker->shuffle($universidad),
             // 'id_user' => $this->faker->unique()->randomElement($users),
             // 'id_universidad' => $this->faker->unique(true)->randomElement($universidad),
 
