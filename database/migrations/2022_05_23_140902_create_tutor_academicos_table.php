@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('email');  
             $table->integer('celular');      
             $table->foreignId('id_user')->unique()->constrained('users');     
-            $table->foreignId('id_universidad')->unique()->constrained('universidad');      
+            $table->foreignId('id_universidad')->constrained('universidad');      
             $table->timestamps();
         });
     }

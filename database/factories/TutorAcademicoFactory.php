@@ -18,7 +18,7 @@ class TutorAcademicoFactory extends Factory
     public function definition()
     {
         // $users = \App\Models\User::pluck('id')->toArray();
-        // $universidad = \App\Models\Universidad::pluck('id')->toArray();
+        $universidad = \App\Models\Universidad::pluck('id')->toArray();
         return [
             //
             'nombres' => $this->faker->firstName(),
@@ -27,7 +27,7 @@ class TutorAcademicoFactory extends Factory
             'email' => $this->faker->safeEmail(),
             'celular' => $this->faker->numerify('########'),
             'id_user' => User::factory(),
-            'id_universidad' => Universidad::factory(),
+            'id_universidad' => $this->faker->randomElement($universidad),
 
             // 'id_user' => function (array $attributes) {
             //     return \App\Models\User::find($attributes['id'])->type;
