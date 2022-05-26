@@ -10,4 +10,8 @@ class Rol extends Model
     protected $table='rol';
     use HasFactory;
 
+    public function users (){
+        return $this->hasMany(User::class,'id_rol');
+    }
+
 }
