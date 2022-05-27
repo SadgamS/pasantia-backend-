@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\TutorAcademico;
 use Illuminate\Http\Request;
-use App\Models\User;
 
-class UserController extends Controller
+class TutorAcademicoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,9 +14,10 @@ class UserController extends Controller
      */
     public function index()
     {
-        // 
-        $users = User::with('rol')->get();
-        return response()->json(['status'=>'ok','data'=>$users], 200);
+        //
+        $tutoresAcademicos = TutorAcademico::with(['user','user.rol','universidad'])->get();
+
+        return $tutoresAcademicos;
     }
 
     /**
@@ -63,5 +64,4 @@ class UserController extends Controller
     {
         //
     }
-   
 }

@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\EvaluacionPasante;
 use Illuminate\Http\Request;
-use App\Models\User;
 
-class UserController extends Controller
+class EvaluacionPController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,9 +14,11 @@ class UserController extends Controller
      */
     public function index()
     {
-        // 
-        $users = User::with('rol')->get();
-        return response()->json(['status'=>'ok','data'=>$users], 200);
+        //
+
+        $evaluaciones = EvaluacionPasante::with(['pasantes'])->get();
+        return $evaluaciones;
+        
     }
 
     /**
@@ -63,5 +65,4 @@ class UserController extends Controller
     {
         //
     }
-   
 }

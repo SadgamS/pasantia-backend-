@@ -23,7 +23,7 @@ return new class extends Migration
             $table->integer('capacidad_trabajo_pasantia');
             $table->integer('evaluacion_pasantia');
             $table->integer('puntuacion_total');
-            $table->foreignId('id_estudiante')->constrained('estudiante');
+            $table->foreignId('id_pasante')->constrained('pasante_trabajo_d');
             $table->timestamps();
         });
     }

@@ -9,4 +9,9 @@ class EvaluacionPasante extends Model
 {
     use HasFactory;
     protected $table = 'evaluacion_pasante';
+
+    public function pasantes()
+    {
+        return $this->hasOne(PasanteTrabajoD::class,'id', 'id_pasante');
+    }
 }

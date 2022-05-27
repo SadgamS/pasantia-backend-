@@ -7,6 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class TutorAcademico extends Model
 {
-    protected $table='tutor_academico';
     use HasFactory;
+    protected $table='tutor_academico';
+
+    public function user(){
+        return $this->hasOne(User::class, 'id', 'id_user');
+    }
+
+    public function universidad(){
+        return $this->belongsTo(Universidad::class, 'id_universidad', 'id');
+    }
 }

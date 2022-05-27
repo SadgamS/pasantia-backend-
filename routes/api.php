@@ -1,5 +1,13 @@
 <?php
 
+use App\Http\Controllers\EvaluacionPController;
+use App\Http\Controllers\PasanteTrabajoDController;
+use App\Http\Controllers\PasantiaTrabajoDirigidoController;
+use App\Http\Controllers\PostulantesController;
+use App\Http\Controllers\TutorAcademicoController;
+use App\Http\Controllers\TutorInstitucionalController;
+use App\Http\Controllers\UnidadController;
+use App\Http\Controllers\UniversidadController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -20,3 +28,11 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::get('/users', [UserController::class, 'index']);
+Route::get('/universidades', [UniversidadController::class, 'index']);
+Route::get('/tutores_academicos', [TutorAcademicoController::class, 'index']);
+Route::get('/unidades', [UnidadController::class, 'index']);
+Route::get('/tutores_institucionales', [TutorInstitucionalController::class, 'index']);
+Route::get('/pasantias_trabajodirigido', [PasantiaTrabajoDirigidoController::class, 'index']);
+Route::get('/postulantes', [PostulantesController::class, 'index']);
+Route::get('/pasantes', [PasanteTrabajoDController::class, 'index']);
+Route::get('/evaluacion_pasantes', [EvaluacionPController::class, 'index']);

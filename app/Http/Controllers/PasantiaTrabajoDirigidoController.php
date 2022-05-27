@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PasantiaTrabajoDirigido;
 use Illuminate\Http\Request;
-use App\Models\User;
 
-class UserController extends Controller
+class PasantiaTrabajoDirigidoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,9 +14,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        // 
-        $users = User::with('rol')->get();
-        return response()->json(['status'=>'ok','data'=>$users], 200);
+        //
+        $pasantias = PasantiaTrabajoDirigido::with(['unidad', 'estudiantes'])->get();
+        return $pasantias;
     }
 
     /**
@@ -63,5 +63,4 @@ class UserController extends Controller
     {
         //
     }
-   
 }

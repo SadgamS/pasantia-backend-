@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Funcionario;
 use Illuminate\Http\Request;
-use App\Models\User;
 
-class UserController extends Controller
+class TutorInstitucionalController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,9 +14,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        // 
-        $users = User::with('rol')->get();
-        return response()->json(['status'=>'ok','data'=>$users], 200);
+        //
+        $tutoresIns = Funcionario::with(['user','unidad'])->get();
+        return $tutoresIns;
     }
 
     /**
@@ -63,5 +63,4 @@ class UserController extends Controller
     {
         //
     }
-   
 }
