@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\EvaluacionPController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PasanteTrabajoDController;
 use App\Http\Controllers\PasantiaTrabajoDirigidoController;
 use App\Http\Controllers\PostulantesController;
@@ -26,6 +27,8 @@ use Illuminate\Support\Facades\Route;
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //     return $request->user();
 // });
+
+Route::post('/login', [LoginController::class, 'authenticate']);
 
 Route::get('/users', [UserController::class, 'index']);
 Route::get('/universidades', [UniversidadController::class, 'index']);
