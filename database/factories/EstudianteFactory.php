@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Persona;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -20,14 +21,8 @@ class EstudianteFactory extends Factory
         $pasantias = \App\Models\PasantiaTrabajoDirigido::pluck('id')->toArray();
         return [
             //
-            'nombres' => $this->faker->firstName(),
-            'apellidos' => $this->faker->lastName(),
-            'ci' => $this->faker->numerify('#########'),
-            'extension' => $this->faker->randomElement(['LP','SC','CBBA', 'OR','PTS','TR','PD']),
-            'fecha_nacimiento' => $this->faker->date('d-m-Y'),
-            'sexo' => $this->faker->randomElement(['M', 'F']),
+            'id' => Persona::factory(),
             'email' => $this->faker->email(),
-            'celular' => $this->faker->numerify('#######'),
             'domicilio' => $this->faker->address(),
             'carrera' => $this->faker->word(),
             'id_universidad' => $this->faker->randomElement($universidad),

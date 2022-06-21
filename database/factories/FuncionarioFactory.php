@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Persona;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 use \App\Models\User;
@@ -20,14 +21,12 @@ class FuncionarioFactory extends Factory
     public function definition()
     {
         $unidades = \App\Models\Unidad::pluck('id')->toArray();
+        $persona = \App\Models\Persona::pluck('id')->toArray();
         return [
             //
-            'nombres' => $this->faker->firstName(),
-            'apellidos' => $this->faker->lastName(),
+            'id' => Persona::factory(),
             'profesion' => $this->faker->jobTitle(),
             'email' => $this->faker->email(),
-            'celular' => $this->faker->numerify('#######'),
-            'id_user' => User::factory(),
             'id_unidad' => $this->faker->randomElement($unidades),
 
         ];

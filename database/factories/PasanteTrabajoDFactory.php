@@ -25,7 +25,6 @@ class PasanteTrabajoDFactory extends Factory
             'id_estudiante' => \App\Models\Estudiante::factory(),
             'id_tutor_institucional' => $this->faker->randomElement($tutorins),
             'id_tutor_academico' => $this->faker->randomElement($tutoraca),
-            'id_usuario' => \App\Models\User::factory(),
         ];
     }
 }

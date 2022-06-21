@@ -14,13 +14,11 @@ return new class extends Migration
     public function up()
     {
         Schema::create('tutor_academico', function (Blueprint $table) {
-            $table->id();
-            $table->string('nombres');  
-            $table->string('apellidos');  
+            $table->integer('id'); 
             $table->string('grado_academico');  
             $table->string('email');  
-            $table->integer('celular');      
-            $table->foreignId('id_user')->unique()->constrained('users');     
+            $table->primary('id');      
+            $table->foreign('id')->references('id')->on('persona');     
             $table->foreignId('id_universidad')->constrained('universidad');      
             $table->timestamps();
         });

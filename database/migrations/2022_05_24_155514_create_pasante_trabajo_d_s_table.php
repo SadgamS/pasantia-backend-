@@ -20,7 +20,6 @@ return new class extends Migration
             $table->foreignId('id_estudiante')->constrained('estudiante');
             $table->foreignId('id_tutor_institucional')->constrained('funcionario');
             $table->foreignId('id_tutor_academico')->constrained('tutor_academico');
-            $table->foreignId('id_usuario')->constrained('users');
             $table->timestamps();
         });
     }

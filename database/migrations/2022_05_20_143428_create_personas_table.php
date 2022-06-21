@@ -13,13 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('funcionario', function (Blueprint $table) {
-            $table->integer('id');
-            $table->string('profesion');
-            $table->string('email');
-            $table->primary('id');
-            $table->foreign('id')->references('id')->on('persona');
-            $table->foreignId('id_unidad')->constrained('unidad');
+        Schema::create('persona', function (Blueprint $table) {
+            $table->id();
+            $table->string('nombres');
+            $table->string('apellidos');
+            $table->integer('ci');
+            $table->string('extension');
+            $table->enum('genero',['M','F']);
+            $table->date('fecha_nacimiento'); 
+            $table->integer('celular'); 
             $table->timestamps();
         });
     }
@@ -31,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('funcionario');
+        Schema::dropIfExists('persona');
     }
 };

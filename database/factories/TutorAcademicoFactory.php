@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Persona;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use \App\Models\User;
 use \App\Models\Universidad;
@@ -19,14 +20,12 @@ class TutorAcademicoFactory extends Factory
     {
         // $users = \App\Models\User::pluck('id')->toArray();
         $universidad = \App\Models\Universidad::pluck('id')->toArray();
+        $persona = \App\Models\Persona::pluck('id')->toArray();
         return [
             //
-            'nombres' => $this->faker->firstName(),
-            'apellidos' => $this->faker->lastName(),
+            'id' => Persona::factory(),
             'grado_academico' => $this->faker->randomElement(['Licenciado', 'Magister']),
             'email' => $this->faker->safeEmail(),
-            'celular' => $this->faker->numerify('########'),
-            'id_user' => User::factory(),
             'id_universidad' => $this->faker->randomElement($universidad),
 
             // 'id_user' => function (array $attributes) {

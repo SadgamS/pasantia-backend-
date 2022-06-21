@@ -14,8 +14,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\Rol::factory(3)->create();
-        // \App\Models\User::factory(10)->create();
+        // \App\Models\Persona::factory(10)->create();
         \App\Models\Universidad::factory(10)->create();
         \App\Models\TutorAcademico::factory(10)->create();
         \App\Models\Unidad::factory(10)->create();
@@ -26,14 +25,16 @@ class DatabaseSeeder extends Seeder
         \App\Models\EvaluacionPasante::factory(10)->create();
         \App\Models\TipoDocumento::factory(7)->create();
         \App\Models\Documento::factory(10)->create();
-        
-
-
+        \App\Models\Rol::factory(3)->create();
         \App\Models\User::factory()->create([
-            'name' => 'Test User',
+        'name' => 'Test User',
             'email' => 'test@test.com',
             'password' => 'test',
             'id_rol' => 1
         ]);
+        \App\Models\User::factory(10)->create();
+        
+
+
     }
 }
