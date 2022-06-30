@@ -4,6 +4,7 @@ use App\Http\Controllers\EvaluacionPController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PasanteTrabajoDController;
 use App\Http\Controllers\PasantiaTrabajoDirigidoController;
+use App\Http\Controllers\PersonaController;
 use App\Http\Controllers\PostulantesController;
 use App\Http\Controllers\TutorAcademicoController;
 use App\Http\Controllers\TutorInstitucionalController;
@@ -39,3 +40,5 @@ Route::get('/pasantias_trabajodirigido', [PasantiaTrabajoDirigidoController::cla
 Route::get('/postulantes', [PostulantesController::class, 'index']);
 Route::get('/pasantes', [PasanteTrabajoDController::class, 'index']);
 Route::get('/evaluacion_pasantes', [EvaluacionPController::class, 'index']);
+Route::get('/personas', [PersonaController::class, 'index']);
+Route::get('/personas/users', [PersonaController::class, 'selected']);
