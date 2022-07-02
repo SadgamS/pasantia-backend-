@@ -6,6 +6,7 @@ use App\Http\Controllers\PasanteTrabajoDController;
 use App\Http\Controllers\PasantiaTrabajoDirigidoController;
 use App\Http\Controllers\PersonaController;
 use App\Http\Controllers\PostulantesController;
+use App\Http\Controllers\RolController;
 use App\Http\Controllers\TutorAcademicoController;
 use App\Http\Controllers\TutorInstitucionalController;
 use App\Http\Controllers\UnidadController;
@@ -32,6 +33,7 @@ use Illuminate\Support\Facades\Route;
 Route::post('/login', [LoginController::class, 'authenticate']);
 
 Route::get('/users', [UserController::class, 'index']);
+Route::get('/rols', [RolController::class, 'index']);
 Route::get('/universidades', [UniversidadController::class, 'index']);
 Route::get('/tutores_academicos', [TutorAcademicoController::class, 'index']);
 Route::get('/unidades', [UnidadController::class, 'index']);
