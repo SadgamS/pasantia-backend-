@@ -18,13 +18,16 @@ class PersonaFactory extends Factory
     {
         return [
             //
-            'nombres' => $this->faker->firstName(),
-            'apellidos' => $this->faker->lastName(),
+            'primer_nombre' => $this->faker->firstName(),
+            'segundo_nombre' => $this->faker->firstName(),
+            'apellido_paterno' => $this->faker->lastName(),
+            'apellido_materno' => $this->faker->lastName(),
             'ci' => $this->faker->numerify('#########'),
             'extension' => $this->faker->randomElement(['LP','SC','CBBA', 'OR','PTS','TR','PD']),
             'genero' => $this->faker->randomElement(['M', 'F']),
             'fecha_nacimiento' => $this->faker->date('d-m-Y'),
             'celular' => $this->faker->numerify('#######'),
+            'correo' => $this->faker->unique()->safeEmail(),
         ];
     }
 }

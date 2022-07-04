@@ -21,11 +21,9 @@ class UserFactory extends Factory
         $rols = \App\Models\Rol::pluck('id')->toArray();
         $persona = \App\Models\Persona::pluck('id')->toArray();
         return [
-            'name' => $this->faker->name(),
-            'email' => $this->faker->unique()->safeEmail(),
-            'email_verified_at' => now(),
+            'usuario' => $this->faker->name(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-            'remember_token' => Str::random(10),
+            'ultimo_ingreso' => now(),
             'id_rol' => $this->faker->randomElement($rols),
             'id_persona' => $this->faker->unique()->randomElement($persona),
         ];

@@ -21,10 +21,10 @@ class PersonaController extends Controller
     }
 
     public function selected(){
-        $personas = DB::table('persona')->select('id', 'nombres', 'apellidos', 'ci', 'extension')
+        $personas = DB::table('persona')->select('id', 'primer_nombre', 'segundo_nombre', 'apellido_paterno', 'apellido_materno', 'ci', 'extension')
                                         ->get();
         return $personas;
-    }
+    }   
 
     /**
      * Store a newly created resource in storage.

@@ -27,8 +27,7 @@ class DatabaseSeeder extends Seeder
         \App\Models\Documento::factory(10)->create();
         \App\Models\Rol::factory(3)->create();
         \App\Models\User::factory()->create([
-        'name' => 'Test User',
-            'email' => 'test@test.com',
+            'usuario' => 'Test User',
             'password' => bcrypt('test'),
             'id_rol' => 1
         ]);

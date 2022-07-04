@@ -18,10 +18,11 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
-        'email',
+        'usuario',
+        'ultimo_ingreso',
         'password',
     ];
+
 
     /**
      * The attributes that should be hidden for serialization.
@@ -39,8 +40,14 @@ class User extends Authenticatable
      * @var array<string, string>
      */
     protected $casts = [
-        'email_verified_at' => 'datetime',
+        'created_at' => 'datetime:Y-m-d H:i:s' ,
+        'updated_at' => 'datetime:Y-m-d H:i:s' ,
     ];
+    
+    protected function serializeDate(\DateTimeInterface $date)
+    {
+        return $date->format('Y-m-d H:i:s');
+    }
 
     public function rol(){
         return $this->belongsTo(Rol::class,'id_rol','id');
