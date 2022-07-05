@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('segundo_nombre')->nullable();
             $table->string('apellido_paterno')->nullable();
             $table->string('apellido_materno')->nullable();
-            $table->integer('ci');
+            $table->string('ci');
             $table->string('extension');
             $table->enum('genero',['M','F']);
             $table->date('fecha_nacimiento'); 
