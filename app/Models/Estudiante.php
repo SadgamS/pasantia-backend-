@@ -19,4 +19,9 @@ class Estudiante extends Model
     {
         return $this->belongsTo(PasantiaTrabajoDirigido::class, 'id_pasantia', 'id');
     }
+
+    public function persona()
+    {
+        return $this->hasOne(Persona::class, 'id', 'id');
+    }
 }
