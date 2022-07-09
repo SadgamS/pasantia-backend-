@@ -15,16 +15,19 @@ return new class extends Migration
     {
         Schema::create('persona', function (Blueprint $table) {
             $table->id();
-            $table->string('primer_nombre')->nullable(false);
-            $table->string('segundo_nombre')->nullable();
-            $table->string('apellido_paterno')->nullable();
-            $table->string('apellido_materno')->nullable();
+            $table->string('nombres')->nullable(false);
+            $table->string('primer_apellido')->nullable(false);
+            $table->string('segundo_apellido')->nullable();
             $table->string('ci');
             $table->string('extension');
             $table->enum('genero',['M','F']);
             $table->date('fecha_nacimiento'); 
-            $table->integer('celular');
+            $table->string('domicilio');
+            $table->string('ciudad');
             $table->string('correo')->nullable();
+            $table->integer('celular');
+            $table->integer('numero_referencia');
+            $table->string('nombre_referencia');
             $table->timestamps();
         });
     }
