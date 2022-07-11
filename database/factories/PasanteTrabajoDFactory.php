@@ -22,7 +22,7 @@ class PasanteTrabajoDFactory extends Factory
             //
             'fecha_inicio' => $this->faker->date('d-m-Y'),
             'fecha_final' => $this->faker->date('d-m-Y'),
-            'id_estudiante' => \App\Models\Estudiante::factory(),
+            'id_postulante' => \App\Models\Postulante::factory(),
             'id_tutor_institucional' => $this->faker->randomElement($tutorins),
             'id_tutor_academico' => $this->faker->randomElement($tutoraca),
         ];

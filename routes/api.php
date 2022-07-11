@@ -12,6 +12,7 @@ use App\Http\Controllers\TutorInstitucionalController;
 use App\Http\Controllers\UnidadController;
 use App\Http\Controllers\UniversidadController;
 use App\Http\Controllers\UserController;
+use App\Models\PasantiaTrabajoDirigido;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -44,3 +45,4 @@ Route::get('/pasantes', [PasanteTrabajoDController::class, 'index']);
 Route::get('/evaluacion_pasantes', [EvaluacionPController::class, 'index']);
 Route::get('/personas', [PersonaController::class, 'index']);
 Route::get('/personas/users', [PersonaController::class, 'selected']);
+Route::get('/convocatorias/{tipo}', [PasantiaTrabajoDirigidoController::class, 'convocatorias']);

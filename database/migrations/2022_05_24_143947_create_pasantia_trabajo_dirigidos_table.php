@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('pasantia_trabajo_dirigido', function (Blueprint $table) {
             $table->id();
             $table->string('tipo');
+            $table->string('nombre_ref');
             $table->integer('duracion_meses');
             $table->integer('cant_horas');
             $table->string('formacion_requerida');

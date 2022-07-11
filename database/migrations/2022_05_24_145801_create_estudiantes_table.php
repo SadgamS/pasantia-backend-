@@ -13,11 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('estudiante', function (Blueprint $table) {
-            $table->integer('id'); 
-            $table->string('email'); 
-            $table->string('domicilio'); 
+        Schema::create('postulante', function (Blueprint $table) {
+            $table->integer('id');
+            $table->enum('tipo_postulante',['Estudiante','Egresado']);
+            $table->string('numero_anios_semestre');
             $table->string('carrera');
+            $table->enum('modalidad',['Pasantia','Trabajo dirigido']);
             $table->primary('id');
             $table->foreign('id')->references('id')->on('persona'); 
             $table->foreignId('id_universidad')->constrained('universidad'); 
@@ -33,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('estudiante');
+        Schema::dropIfExists('postulante');
     }
 };

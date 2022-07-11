@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Estudiante;
+use App\Models\Postulante;
 use Illuminate\Http\Request;
 
 class PostulantesController extends Controller
@@ -15,7 +15,7 @@ class PostulantesController extends Controller
     public function index()
     {
         //
-        $postulantes = Estudiante::with(['universidad', 'pasantia', 'persona'])->get();
+        $postulantes = Postulante::with(['universidad', 'pasantia', 'persona'])->get();
         return $postulantes;
     }
 

@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
         \App\Models\Unidad::factory(10)->create();
         \App\Models\Funcionario::factory(10)->create();
         \App\Models\PasantiaTrabajoDirigido::factory(10)->create();
-        \App\Models\Estudiante::factory(5)->create();
+        \App\Models\Postulante::factory(5)->create();
         \App\Models\PasanteTrabajoD::factory(5)->create();
         \App\Models\EvaluacionPasante::factory(10)->create();
         \App\Models\TipoDocumento::factory(7)->create();

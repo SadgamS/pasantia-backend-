@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Estudiante>
  */
-class EstudianteFactory extends Factory
+class PostulanteFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -22,9 +22,10 @@ class EstudianteFactory extends Factory
         return [
             //
             'id' => Persona::factory(),
-            'email' => $this->faker->email(),
-            'domicilio' => $this->faker->address(),
+            'tipo_postulante' => $this->faker->randomElement(['Estudiante', 'Egresado']),
+            'numero_anios_semestre' => $this->faker->randomElement(['4to año', '5to año']),
             'carrera' => $this->faker->word(),
+            'modalidad' => $this->faker->randomElement(['Pasantia', 'Trabajo dirigido']),
             'id_universidad' => $this->faker->randomElement($universidad),
             'id_pasantia' => $this->faker->randomElement($pasantias),
         ];

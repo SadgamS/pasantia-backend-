@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\PasantiaTrabajoDirigido;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PasantiaTrabajoDirigidoController extends Controller
 {
@@ -62,5 +63,14 @@ class PasantiaTrabajoDirigidoController extends Controller
     public function destroy($id)
     {
         //
+    }
+    
+    public function convocatorias($tipo)
+    {
+        $convocatoria = DB::table('pasantia_trabajo_dirigido')->select('id','nombre_ref')
+                                            ->where('tipo',$tipo)
+                                            ->where('aprobado', true)
+                                            ->get();
+        return $convocatoria;
     }
 }

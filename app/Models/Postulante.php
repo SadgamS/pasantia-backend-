@@ -5,11 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Estudiante extends Model
+class Postulante extends Model
 {
     use HasFactory;
-    protected $table = 'estudiante';
-
+    protected $table = 'postulante';
     public function universidad()
     {
         return $this->hasOne(Universidad::class, 'id', 'id_universidad');
