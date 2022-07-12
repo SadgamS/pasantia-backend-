@@ -18,9 +18,8 @@ return new class extends Migration
             $table->enum('tipo_postulante',['Estudiante','Egresado']);
             $table->string('numero_anios_semestre');
             $table->string('carrera');
-            $table->enum('modalidad',['Pasantia','Trabajo dirigido']);
             $table->primary('id');
-            $table->foreign('id')->references('id')->on('persona'); 
+            $table->foreignId('id')->constrained('persona')->onDelete('cascade'); 
             $table->foreignId('id_universidad')->constrained('universidad'); 
             $table->foreignId('id_pasantia')->constrained('pasantia_trabajo_dirigido');
             $table->timestamps();

@@ -9,4 +9,13 @@ class Persona extends Model
 {
     use HasFactory;
     protected $table = "persona";
+
+    protected $fillable = ['nombres', 'primer_apellido', 'segundo_apellido', 'ci', 
+                            'extension', 'genero', 'fecha_nacimiento','domicilio', 
+                            'ciudad', 'correo', 'celular', 'numero_referencia', 'nombre_referencia']; 
+
+    protected $casts = [
+        'created_at' => 'datetime:Y-m-d H:i:s' ,
+        'updated_at' => 'datetime:Y-m-d H:i:s' ,
+    ];
 }

@@ -25,7 +25,6 @@ class PostulanteFactory extends Factory
             'tipo_postulante' => $this->faker->randomElement(['Estudiante', 'Egresado']),
             'numero_anios_semestre' => $this->faker->randomElement(['4to año', '5to año']),
             'carrera' => $this->faker->word(),
-            'modalidad' => $this->faker->randomElement(['Pasantia', 'Trabajo dirigido']),
             'id_universidad' => $this->faker->randomElement($universidad),
             'id_pasantia' => $this->faker->randomElement($pasantias),
         ];
