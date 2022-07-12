@@ -17,7 +17,7 @@ class PostulantesController extends Controller
     public function index()
     {
         //
-        $postulantes = Postulante::with(['universidad', 'pasantia', 'persona'])->get();
+        $postulantes = Postulante::with(['universidad', 'pasantia', 'persona'])->orderByDesc('id    ')->get();
         return $postulantes;
     }
 

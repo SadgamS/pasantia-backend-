@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('numero_anios_semestre');
             $table->string('carrera');
             $table->primary('id');
-            $table->foreignId('id')->constrained('persona')->onDelete('cascade'); 
+            $table->foreign('id')->references('id')->on('persona')->onDelete('cascade'); 
             $table->foreignId('id_universidad')->constrained('universidad'); 
             $table->foreignId('id_pasantia')->constrained('pasantia_trabajo_dirigido');
             $table->timestamps();
