@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Documento;
 use App\Models\Persona;
 use App\Models\Postulante;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class PostulantesController extends Controller
 {
@@ -17,7 +19,7 @@ class PostulantesController extends Controller
     public function index()
     {
         //
-        $postulantes = Postulante::with(['universidad', 'pasantia', 'persona'])->orderByDesc('id    ')->get();
+        $postulantes = Postulante::with(['universidad', 'pasantia', 'persona'])->orderByDesc('id')->get();
         return $postulantes;
     }
 
@@ -56,7 +58,16 @@ class PostulantesController extends Controller
                     'id_pasantia' => $request->id_pasantia,
     
                 ]);
-    
+                if ($request->hasFile('doc_ci')) {
+                    $doc_ci = $request->file('doc_ci')->store('postulaciones/'. $persona->ci, 'public');
+                    $documento = Documento::create([
+                        'uuid' => Str::uuid(),
+                        'ruta' => $doc_ci,
+                        'id_persona' => $persona->id,
+                        'id_tipo_documento' => DB::table('tipo_documento')->where('tipodoc', 'ci')->value('id'),
+                    ]);
+                }
+                
             });
 
         } catch (\Exception $e) {

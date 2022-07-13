@@ -16,12 +16,13 @@ class DocumentoFactory extends Factory
      */
     public function definition()
     {
-        $estudiantes = \App\Models\Postulante::pluck('id')->toArray();
+        $estudiantes = \App\Models\Persona::pluck('id')->toArray();
         $tipoDoc = \App\Models\TipoDocumento::pluck('id')->toArray();
         return [
             //
+            'uuid' => $this->faker->uuid(),
             'ruta' => $this->faker->filePath(),
-            'id_postulante' => $this->faker->randomElement($estudiantes),
+            'id_persona' => $this->faker->randomElement($estudiantes),
             'id_tipo_documento' => $this->faker->randomElement($tipoDoc),
         ];
     }

@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Documento extends Model
 {
     use HasFactory;
+
+    protected $table = 'documentos';
+    protected $fillable = ['uuid','ruta','id_persona', 'id_tipo_documento'] ;
+    protected $casts = [
+        'created_at' => 'datetime:Y-m-d H:i:s' ,
+        'updated_at' => 'datetime:Y-m-d H:i:s' ,
+    ];
 }

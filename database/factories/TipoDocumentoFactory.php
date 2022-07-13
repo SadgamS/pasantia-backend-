@@ -20,7 +20,7 @@ class TipoDocumentoFactory extends Factory
             //
             'tipodoc' => $this->faker->unique()->randomElement(['carta carrera', 'hoja de vida',
                                                         'record academico', 'certificado egreso',
-                                                        'matricula', 'informes', 'ficha']),
+                                                        'matricula', 'informes', 'ficha', 'ci']),
         ];
     }
 }

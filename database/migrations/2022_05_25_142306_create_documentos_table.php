@@ -15,8 +15,9 @@ return new class extends Migration
     {
         Schema::create('documentos', function (Blueprint $table) {
             $table->id();
+            $table->uuid('uuid');
             $table->string('ruta');
-            $table->foreignId('id_postulante')->constrained('postulante');
+            $table->foreignId('id_persona')->constrained('persona');
             $table->foreignId('id_tipo_documento')->constrained('tipo_documento');
             $table->timestamps();
         });
