@@ -38,7 +38,7 @@ class PostulantesController extends Controller
                     'primer_apellido' => $request->primer_apellido,
                     'segundo_apellido' => $request->segundo_apellido,
                     'ci' => $request->ci,
-                    'extension' => $request->extension,
+                    'expedicion' => $request->expedicion,
                     'genero' => $request->genero,
                     'fecha_nacimiento' => $request->fecha_nacimiento,
                     'domicilio' => $request->domicilio,
@@ -49,7 +49,7 @@ class PostulantesController extends Controller
                     'nombre_referencia' => $request->nombre_referencia,
                 ]);
     
-                Postulante::create([
+                $postulante = Postulante::create([
                     'id' => $persona->id,
                     'tipo_postulante' => $request->tipo_postulante,
                     'numero_anios_semestre' => $request->numero_anios_semestre,
@@ -69,7 +69,7 @@ class PostulantesController extends Controller
                 }
                 if ($request->hasFile('doc_cv')) {
                     $doc_cv = $request->file('doc_cv')->store('postulaciones/'. $persona->ci, 'public');
-                    Documento::create([
+                    $documento=Documento::create([
                         'uuid' => Str::uuid(),
                         'ruta' => $doc_cv,
                         'id_persona' => $persona->id,
@@ -78,7 +78,7 @@ class PostulantesController extends Controller
                 }
                 if ($request->hasFile('doc_matricula')) {
                     $doc_matricula = $request->file('doc_matricula')->store('postulaciones/'. $persona->ci, 'public');
-                    Documento::create([
+                    $documento=Documento::create([
                         'uuid' => Str::uuid(),
                         'ruta' => $doc_matricula,
                         'id_persona' => $persona->id,
@@ -87,7 +87,7 @@ class PostulantesController extends Controller
                 }
                 if ($request->hasFile('doc_histoAca')) {
                     $doc_histoAca = $request->file('doc_histoAca')->store('postulaciones/'. $persona->ci, 'public');
-                    Documento::create([
+                    $documento=Documento::create([
                         'uuid' => Str::uuid(),
                         'ruta' => $doc_histoAca,
                         'id_persona' => $persona->id,
@@ -96,20 +96,20 @@ class PostulantesController extends Controller
                 }
                 if ($request->hasFile('doc_notasol')) {
                     $doc_notasol = $request->file('doc_notasol')->store('postulaciones/'. $persona->ci, 'public');
-                    Documento::create([
+                    $documento=Documento::create([
                         'uuid' => Str::uuid(),
                         'ruta' => $doc_notasol,
                         'id_persona' => $persona->id,
                         'id_tipo_documento' => DB::table('tipo_documento')->where('tipodoc', 'carta carrera')->value('id'),
                     ]);
                 }
-                if ($request->hasFile('doc_cerificadoEgreso')) {
-                    $doc_cerificadoEgreso = $request->file('doc_cerificadoEgreso')->store('postulaciones/'. $persona->ci, 'public');
-                    Documento::create([
+                if ($request->hasFile('doc_certificadoEgreso')) {
+                    $doc_cerificadoEgreso = $request->file('doc_certificadoEgreso')->store('postulaciones/'. $persona->ci, 'public');
+                    $documento=Documento::create([
                         'uuid' => Str::uuid(),
                         'ruta' => $doc_cerificadoEgreso,
                         'id_persona' => $persona->id,
-                        'id_tipo_documento' => DB::table('tipo_documento')->where('tipodoc', 'certificado de egreso')->value('id'),
+                        'id_tipo_documento' => DB::table('tipo_documento')->where('tipodoc', 'certificado egreso')->value('id'),
                     ]);
                 }
                 

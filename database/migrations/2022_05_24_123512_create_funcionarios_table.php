@@ -13,10 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('funcionario', function (Blueprint $table) {
+        Schema::create('servidor_publico', function (Blueprint $table) {
             $table->integer('id');
-            $table->string('profesion');
-            $table->string('email');
+            $table->string('formacion_academica');
+            $table->string('nivel_academico');
             $table->primary('id');
             $table->foreign('id')->references('id')->on('persona');
             $table->foreignId('id_unidad')->constrained('unidad');
@@ -31,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('funcionario');
+        Schema::dropIfExists('servidor_publico');
     }
 };

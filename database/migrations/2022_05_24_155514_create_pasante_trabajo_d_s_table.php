@@ -18,7 +18,7 @@ return new class extends Migration
             $table->date('fecha_inicio');
             $table->date('fecha_final');
             $table->foreignId('id_postulante')->constrained('postulante');
-            $table->foreignId('id_tutor_institucional')->constrained('funcionario');
+            $table->foreignId('id_tutor_institucional')->constrained('servidor_publico');
             $table->foreignId('id_tutor_academico')->constrained('tutor_academico');
             $table->timestamps();
         });

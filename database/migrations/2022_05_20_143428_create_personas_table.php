@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('primer_apellido')->nullable(false);
             $table->string('segundo_apellido')->nullable();
             $table->string('ci');
-            $table->string('extension');
+            $table->string('expedicion');
             $table->enum('genero',['M','F']);
             $table->date('fecha_nacimiento'); 
             $table->string('domicilio');

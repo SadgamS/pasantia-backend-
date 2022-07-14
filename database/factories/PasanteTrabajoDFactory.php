@@ -16,7 +16,7 @@ class PasanteTrabajoDFactory extends Factory
      */
     public function definition()
     {
-        $tutorins = \App\Models\Funcionario::pluck('id')->toArray();
+        $tutorins = \App\Models\ServidorPublico::pluck('id')->toArray();
         $tutoraca = \App\Models\TutorAcademico::pluck('id')->toArray();
         return [
             //

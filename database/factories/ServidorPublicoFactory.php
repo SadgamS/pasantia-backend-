@@ -5,13 +5,10 @@ namespace Database\Factories;
 use App\Models\Persona;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-use \App\Models\User;
-use \App\Models\Unidad;
-
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Funcionario>
  */
-class FuncionarioFactory extends Factory
+class ServidorPublicoFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -21,12 +18,10 @@ class FuncionarioFactory extends Factory
     public function definition()
     {
         $unidades = \App\Models\Unidad::pluck('id')->toArray();
-        $persona = \App\Models\Persona::pluck('id')->toArray();
         return [
             //
             'id' => Persona::factory(),
             'profesion' => $this->faker->jobTitle(),
-            'email' => $this->faker->email(),
             'id_unidad' => $this->faker->randomElement($unidades),
 
         ];

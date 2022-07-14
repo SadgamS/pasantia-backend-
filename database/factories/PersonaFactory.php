@@ -22,7 +22,7 @@ class PersonaFactory extends Factory
             'primer_apellido' => $this->faker->lastName(),
             'segundo_apellido' => $this->faker->lastName(),
             'ci' => $this->faker->numerify('#########'),
-            'extension' => $this->faker->randomElement(['LP','SC','CBBA', 'OR','PTS','TR','PD']),
+            'expedicion' => $this->faker->randomElement(['LP','SC','CBBA', 'OR','PTS','TR','PD']),
             'genero' => $this->faker->randomElement(['M', 'F']),
             'fecha_nacimiento' => $this->faker->date('d-m-Y'),
             'domicilio' => $this->faker->address(),

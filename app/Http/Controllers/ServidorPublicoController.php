@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Funcionario;
+use App\Models\ServidorPublico;
 use Illuminate\Http\Request;
 
-class TutorInstitucionalController extends Controller
+class ServidorPublicoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +15,8 @@ class TutorInstitucionalController extends Controller
     public function index()
     {
         //
-        $tutoresIns = Funcionario::with(['user','unidad'])->get();
-        return $tutoresIns;
+        $servidorPublico = ServidorPublico::with(['persona','unidad'])->get();
+        return $servidorPublico;
     }
 
     /**
