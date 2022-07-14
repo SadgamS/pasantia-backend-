@@ -49,7 +49,7 @@ class PostulantesController extends Controller
                     'nombre_referencia' => $request->nombre_referencia,
                 ]);
     
-                $postulante = Postulante::create([
+                Postulante::create([
                     'id' => $persona->id,
                     'tipo_postulante' => $request->tipo_postulante,
                     'numero_anios_semestre' => $request->numero_anios_semestre,
@@ -60,11 +60,56 @@ class PostulantesController extends Controller
                 ]);
                 if ($request->hasFile('doc_ci')) {
                     $doc_ci = $request->file('doc_ci')->store('postulaciones/'. $persona->ci, 'public');
-                    $documento = Documento::create([
+                    Documento::create([
                         'uuid' => Str::uuid(),
                         'ruta' => $doc_ci,
                         'id_persona' => $persona->id,
                         'id_tipo_documento' => DB::table('tipo_documento')->where('tipodoc', 'ci')->value('id'),
+                    ]);
+                }
+                if ($request->hasFile('doc_cv')) {
+                    $doc_cv = $request->file('doc_cv')->store('postulaciones/'. $persona->ci, 'public');
+                    Documento::create([
+                        'uuid' => Str::uuid(),
+                        'ruta' => $doc_cv,
+                        'id_persona' => $persona->id,
+                        'id_tipo_documento' => DB::table('tipo_documento')->where('tipodoc', 'hoja de vida')->value('id'),
+                    ]);
+                }
+                if ($request->hasFile('doc_matricula')) {
+                    $doc_matricula = $request->file('doc_matricula')->store('postulaciones/'. $persona->ci, 'public');
+                    Documento::create([
+                        'uuid' => Str::uuid(),
+                        'ruta' => $doc_matricula,
+                        'id_persona' => $persona->id,
+                        'id_tipo_documento' => DB::table('tipo_documento')->where('tipodoc', 'matricula')->value('id'),
+                    ]);
+                }
+                if ($request->hasFile('doc_histoAca')) {
+                    $doc_histoAca = $request->file('doc_histoAca')->store('postulaciones/'. $persona->ci, 'public');
+                    Documento::create([
+                        'uuid' => Str::uuid(),
+                        'ruta' => $doc_histoAca,
+                        'id_persona' => $persona->id,
+                        'id_tipo_documento' => DB::table('tipo_documento')->where('tipodoc', 'record academico')->value('id'),
+                    ]);
+                }
+                if ($request->hasFile('doc_notasol')) {
+                    $doc_notasol = $request->file('doc_notasol')->store('postulaciones/'. $persona->ci, 'public');
+                    Documento::create([
+                        'uuid' => Str::uuid(),
+                        'ruta' => $doc_notasol,
+                        'id_persona' => $persona->id,
+                        'id_tipo_documento' => DB::table('tipo_documento')->where('tipodoc', 'carta carrera')->value('id'),
+                    ]);
+                }
+                if ($request->hasFile('doc_cerificadoEgreso')) {
+                    $doc_cerificadoEgreso = $request->file('doc_cerificadoEgreso')->store('postulaciones/'. $persona->ci, 'public');
+                    Documento::create([
+                        'uuid' => Str::uuid(),
+                        'ruta' => $doc_cerificadoEgreso,
+                        'id_persona' => $persona->id,
+                        'id_tipo_documento' => DB::table('tipo_documento')->where('tipodoc', 'certificado de egreso')->value('id'),
                     ]);
                 }
                 
