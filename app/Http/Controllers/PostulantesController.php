@@ -7,6 +7,8 @@ use App\Models\Persona;
 use App\Models\Postulante;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+use Webklex\PDFMerger\Facades\PDFMergerFacade as PDFMerger;
 use Illuminate\Support\Str;
 
 class PostulantesController extends Controller
@@ -58,62 +60,137 @@ class PostulantesController extends Controller
                     'id_pasantia' => $request->id_pasantia,
     
                 ]);
+                // $tipoDoc =  DB::table('tipo_documento')->where('nombre', 'DOCUMENTOS DEL POSTULANTE')->value('id');
+                $oMerger = PDFMerger::init();
                 if ($request->hasFile('doc_ci')) {
-                    $doc_ci = $request->file('doc_ci')->store('postulaciones/'. $persona->ci, 'public');
-                    Documento::create([
-                        'uuid' => Str::uuid(),
-                        'ruta' => $doc_ci,
-                        'id_persona' => $persona->id,
-                        'id_tipo_documento' => DB::table('tipo_documento')->where('tipodoc', 'ci')->value('id'),
-                    ]);
+                    $doc_ci = $request->file('doc_ci')->getPathname();
+                    $oMerger->addPDF($doc_ci, 'all');
                 }
                 if ($request->hasFile('doc_cv')) {
-                    $doc_cv = $request->file('doc_cv')->store('postulaciones/'. $persona->ci, 'public');
-                    $documento=Documento::create([
-                        'uuid' => Str::uuid(),
-                        'ruta' => $doc_cv,
-                        'id_persona' => $persona->id,
-                        'id_tipo_documento' => DB::table('tipo_documento')->where('tipodoc', 'hoja de vida')->value('id'),
-                    ]);
+                    $doc_cv = $request->file('doc_cv')->getPathname();
+                    $oMerger->addPDF($doc_cv, 'all');
                 }
-                if ($request->hasFile('doc_matricula')) {
-                    $doc_matricula = $request->file('doc_matricula')->store('postulaciones/'. $persona->ci, 'public');
-                    $documento=Documento::create([
-                        'uuid' => Str::uuid(),
-                        'ruta' => $doc_matricula,
-                        'id_persona' => $persona->id,
-                        'id_tipo_documento' => DB::table('tipo_documento')->where('tipodoc', 'matricula')->value('id'),
-                    ]);
-                }
-                if ($request->hasFile('doc_histoAca')) {
-                    $doc_histoAca = $request->file('doc_histoAca')->store('postulaciones/'. $persona->ci, 'public');
-                    $documento=Documento::create([
-                        'uuid' => Str::uuid(),
-                        'ruta' => $doc_histoAca,
-                        'id_persona' => $persona->id,
-                        'id_tipo_documento' => DB::table('tipo_documento')->where('tipodoc', 'record academico')->value('id'),
-                    ]);
-                }
-                if ($request->hasFile('doc_notasol')) {
-                    $doc_notasol = $request->file('doc_notasol')->store('postulaciones/'. $persona->ci, 'public');
-                    $documento=Documento::create([
-                        'uuid' => Str::uuid(),
-                        'ruta' => $doc_notasol,
-                        'id_persona' => $persona->id,
-                        'id_tipo_documento' => DB::table('tipo_documento')->where('tipodoc', 'carta carrera')->value('id'),
-                    ]);
-                }
-                if ($request->hasFile('doc_certificadoEgreso')) {
-                    $doc_cerificadoEgreso = $request->file('doc_certificadoEgreso')->store('postulaciones/'. $persona->ci, 'public');
-                    $documento=Documento::create([
-                        'uuid' => Str::uuid(),
-                        'ruta' => $doc_cerificadoEgreso,
-                        'id_persona' => $persona->id,
-                        'id_tipo_documento' => DB::table('tipo_documento')->where('tipodoc', 'certificado egreso')->value('id'),
-                    ]);
-                }
+                // if ($request->hasFile('doc_matricula')) {
+                //     $doc_matricula = $request->file('doc_matricula')->getPathname();
+                //     $oMerger->addPDF($doc_matricula, 'all');
+                // }
+                // if ($request->hasFile('doc_histoAca')) {
+                //     $doc_histoAca = $request->file('doc_histoAca')->getPathname();
+                //     $oMerger->addPDF($doc_histoAca, 'all');
+                // }
+                // if ($request->hasFile('doc_notasol')) {
+                //     $doc_notasol = $request->file('doc_notasol')->getPathname();
+                //     $oMerger->addPDF($doc_notasol, 'all');
+                // }
+                // if ($request->hasFile('doc_certificadoEgreso')) {
+                //     $doc_cerificadoEgreso = $request->file('doc_certificadoEgreso')->getPathname();
+                //     $oMerger->addPDF($doc_cerificadoEgreso, 'all');
+                // }
+                $oMerger->merge();
+                $oMerger->save(public_path('merged_result1.pdf'));
+                // $ruta = Storage::putFile('filePersonal/'.$persona->ci, $oMerger, 'public' );
+
+                // Documento::create([
+                //     'nombre' => Str::uuid(),
+                //     'ruta' => '$ruta',
+                //     'id_persona' => $persona->id,
+                //     'id_tipo_documento' => 1
+                // ]);
+                // if ($request->hasFile('doc_ci')) {
+                //     $doc_ci = $request->file('doc_ci')->store('postulaciones/'. $persona->ci, 'public');
+                //     Documento::create([
+                //         'nombre' => Str::uuid(),
+                //         'ruta' => $doc_ci,
+                //         'id_persona' => $persona->id,
+                //         'id_tipo_documento' => DB::table('tipo_documento')->where('tipodoc', 'DOCUMENTOS DEL POSTULANTE')->value('id'),
+                //     ]);
+                // }
+                // if ($request->hasFile('doc_cv')) {
+                //     $doc_cv = $request->file('doc_cv')->store('postulaciones/'. $persona->ci, 'public');
+                //     $documento=Documento::create([
+                //         'uuid' => Str::uuid(),
+                //         'ruta' => $doc_cv,
+                //         'id_persona' => $persona->id,
+                //         'id_tipo_documento' => DB::table('tipo_documento')->where('tipodoc', 'hoja de vida')->value('id'),
+                //     ]);
+                // }
+                // if ($request->hasFile('doc_matricula')) {
+                //     $doc_matricula = $request->file('doc_matricula')->store('postulaciones/'. $persona->ci, 'public');
+                //     $documento=Documento::create([
+                //         'uuid' => Str::uuid(),
+                //         'ruta' => $doc_matricula,
+                //         'id_persona' => $persona->id,
+                //         'id_tipo_documento' => DB::table('tipo_documento')->where('tipodoc', 'matricula')->value('id'),
+                //     ]);
+                // }
+                // if ($request->hasFile('doc_histoAca')) {
+                //     $doc_histoAca = $request->file('doc_histoAca')->store('postulaciones/'. $persona->ci, 'public');
+                //     $documento=Documento::create([
+                //         'uuid' => Str::uuid(),
+                //         'ruta' => $doc_histoAca,
+                //         'id_persona' => $persona->id,
+                //         'id_tipo_documento' => DB::table('tipo_documento')->where('tipodoc', 'record academico')->value('id'),
+                //     ]);
+                // }
+                // if ($request->hasFile('doc_notasol')) {
+                //     $doc_notasol = $request->file('doc_notasol')->store('postulaciones/'. $persona->ci, 'public');
+                //     $documento=Documento::create([
+                //         'uuid' => Str::uuid(),
+                //         'ruta' => $doc_notasol,
+                //         'id_persona' => $persona->id,
+                //         'id_tipo_documento' => DB::table('tipo_documento')->where('tipodoc', 'carta carrera')->value('id'),
+                //     ]);
+                // }
+                // if ($request->hasFile('doc_certificadoEgreso')) {
+                //     $doc_cerificadoEgreso = $request->file('doc_certificadoEgreso')->store('postulaciones/'. $persona->ci, 'public');
+                //     $documento=Documento::create([
+                //         'uuid' => Str::uuid(),
+                //         'ruta' => $doc_cerificadoEgreso,
+                //         'id_persona' => $persona->id,
+                //         'id_tipo_documento' => DB::table('tipo_documento')->where('tipodoc', 'certificado egreso')->value('id'),
+                //     ]);
+                // }
                 
             });
+                // $tipoDoc =  DB::table('tipo_documento')->where('nombre', 'DOCUMENTOS DEL POSTULANTE')->value('id');
+                // if ($request->hasFile('doc_ci')) {
+                //     $doc_ci = $request->file('doc_ci')->getPathname();
+                //     $oMerger = PDFMerger::init();
+                //     $oMerger->addPDF($doc_ci, 'all');
+                //     $oMerger->merge();
+                // $oMerger->save(public_path('merged_result.pdf'));
+                // }
+                // if ($request->hasFile('doc_cv')) {
+                //     $doc_cv = $request->file('doc_cv')->getPathname();
+                //     $oMerger->addPDF($doc_cv, 'all');
+                // }
+                // if ($request->hasFile('doc_matricula')) {
+                //     $doc_matricula = $request->file('doc_matricula')->getPathname();
+                //     $oMerger->addPDF($doc_matricula, 'all');
+                // }
+                // if ($request->hasFile('doc_histoAca')) {
+                //     $doc_histoAca = $request->file('doc_histoAca')->getPathname();
+                //     $oMerger->addPDF($doc_histoAca, 'all');
+                // }
+                // if ($request->hasFile('doc_notasol')) {
+                //     $doc_notasol = $request->file('doc_notasol')->getPathname();
+                //     $oMerger->addPDF($doc_notasol, 'all');
+                // }
+                // if ($request->hasFile('doc_certificadoEgreso')) {
+                //     $doc_cerificadoEgreso = $request->file('doc_certificadoEgreso')->getPathname();
+                //     $oMerger->addPDF($doc_cerificadoEgreso, 'all');
+                // }
+                // $oMerger->merge();
+                // $oMerger->save(public_path('merged_result.pdf'));
+                // $ruta = Storage::putFile('filePersonal/'.$persona->ci, $oMerger, 'public' );
+
+                // Documento::create([
+                //     'nombre' => Str::uuid(),
+                //     'ruta' => public_path(),
+                //     'id_persona' => $persona->id,
+                //     'id_tipo_documento' => $tipoDoc
+                // ]);
+        // });
 
         } catch (\Exception $e) {
             return response()->json(['message' => 'error']);

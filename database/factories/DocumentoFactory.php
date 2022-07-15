@@ -20,7 +20,7 @@ class DocumentoFactory extends Factory
         $tipoDoc = \App\Models\TipoDocumento::pluck('id')->toArray();
         return [
             //
-            'uuid' => $this->faker->uuid(),
+            'nombre' => $this->faker->uuid(),
             'ruta' => $this->faker->filePath(),
             'id_persona' => $this->faker->randomElement($estudiantes),
             'id_tipo_documento' => $this->faker->randomElement($tipoDoc),

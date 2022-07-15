@@ -21,7 +21,8 @@ class ServidorPublicoFactory extends Factory
         return [
             //
             'id' => Persona::factory(),
-            'profesion' => $this->faker->jobTitle(),
+            'nivel_academico' => $this->faker->jobTitle(),
+            'formacion_academica' => $this->faker->jobTitle(),
             'id_unidad' => $this->faker->randomElement($unidades),
 
         ];

@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
         \App\Models\Postulante::factory(5)->create();
         \App\Models\PasanteTrabajoD::factory(5)->create();
         \App\Models\EvaluacionPasante::factory(10)->create();
-        \App\Models\TipoDocumento::factory(7)->create();
+        \App\Models\TipoDocumento::factory(4)->create();
         \App\Models\Documento::factory(10)->create();
         \App\Models\Rol::factory(3)->create();
         \App\Models\User::factory()->create([

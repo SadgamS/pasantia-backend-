@@ -11,7 +11,7 @@ class Persona extends Model
     protected $table = "persona";
 
     protected $fillable = ['nombres', 'primer_apellido', 'segundo_apellido', 'ci', 
-                            'extension', 'genero', 'fecha_nacimiento','domicilio', 
+                            'expedicion', 'genero', 'fecha_nacimiento','domicilio', 
                             'ciudad', 'correo', 'celular', 'numero_referencia', 'nombre_referencia']; 
 
     protected $casts = [
