@@ -23,7 +23,7 @@ class PostulantesController extends Controller
     public function index()
     {
         //
-        $postulantes = Postulante::with(['universidad', 'pasantia', 'persona'])->orderByDesc('id')->get();
+        $postulantes = Postulante::with(['universidad', 'pasantia', 'persona'])->orderByDesc('id')->paginate(5);
         return $postulantes;
     }
 

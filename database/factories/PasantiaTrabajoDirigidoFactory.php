@@ -19,7 +19,7 @@ class PasantiaTrabajoDirigidoFactory extends Factory
         $unidades = \App\Models\Unidad::pluck('id')->toArray();
         return [
             //
-            'tipo' => $this->faker->randomElement(['pasantia', 'trabajo dirigido']),
+            'tipo' => $this->faker->randomElement(['PASANTIA', 'TRABAJO DIRIGIDO']),
             'nombre_ref' => $this->faker->sentence(8),
             'duracion_meses' => $this->faker->numberBetween(3,6),
             'cant_horas' => $this->faker->numberBetween(4,8),

@@ -22,7 +22,7 @@ class PostulanteFactory extends Factory
         return [
             //
             'id' => Persona::factory(),
-            'tipo_postulante' => $this->faker->randomElement(['Estudiante', 'Egresado']),
+            'tipo_postulante' => $this->faker->randomElement(['ESTUDIANTE', 'EGRESADO']),
             'numero_anios_semestre' => $this->faker->randomElement(['4to año', '5to año']),
             'carrera' => $this->faker->word(),
             'id_universidad' => $this->faker->randomElement($universidad),

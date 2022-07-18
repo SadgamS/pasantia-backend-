@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('postulante', function (Blueprint $table) {
             $table->integer('id');
-            $table->enum('tipo_postulante',['Estudiante','Egresado']);
+            $table->enum('tipo_postulante',['ESTUDIANTE','EGRESADO']);
             $table->string('numero_anios_semestre');
             $table->string('carrera');
             $table->primary('id');

@@ -12,10 +12,10 @@ class ServidorPublicoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
-        $servidorPublico = ServidorPublico::with(['persona','unidad'])->get();
+        $servidorPublico = ServidorPublico::with(['persona','unidad'])->paginate(5);
         return $servidorPublico;
     }
 
