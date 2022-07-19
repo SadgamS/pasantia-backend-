@@ -18,19 +18,19 @@ class ServidorPublicoController extends Controller
         $search = $request->input('search');
         $words = preg_split('/\s+/', $search, -1, PREG_SPLIT_NO_EMPTY);
         $servidorPublico = ServidorPublico::query()
-        ->with(['persona','unidad'])
-        ->whereHas('persona', function($query) use($words){
-            foreach ($words as $value) {
-                $query->where('nombres', 'ilike', "%$value%")
-                      ->orWhere('primer_apellido', 'ilike', "%$value%")
-                      ->orWhere('segundo_apellido', 'ilike', "%$value%")
-                      ->orWhere('ci', 'ilike', "%$value%")
-                      ->orWhere('expedicion', 'ilike', "%$value%");
-            }
-        })->orWhere('formacion_academica', 'ilike', "%$search%")
-        ->orWhere('nivel_academico', 'ilike', "%$search%")
-        ->orderByDesc('id')
-        ->paginate(5);
+            ->with(['persona', 'unidad'])
+            ->whereHas('persona', function ($query) use ($words) {
+                foreach ($words as $value) {
+                    $query->where('nombres', 'ilike', "%$value%")
+                        ->orWhere('primer_apellido', 'ilike', "%$value%")
+                        ->orWhere('segundo_apellido', 'ilike', "%$value%")
+                        ->orWhere('ci', 'ilike', "%$value%")
+                        ->orWhere('expedicion', 'ilike', "%$value%");
+                }
+            })->orWhere('formacion_academica', 'ilike', "%$search%")
+            ->orWhere('nivel_academico', 'ilike', "%$search%")
+            ->orderByDesc('id')
+            ->paginate(5);
         return $servidorPublico;
     }
 

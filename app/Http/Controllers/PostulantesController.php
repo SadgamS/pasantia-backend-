@@ -20,10 +20,31 @@ class PostulantesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
-        $postulantes = Postulante::with(['universidad', 'pasantia', 'persona'])->orderByDesc('id')->paginate(5);
+        $search = $request->input('search');
+        $words = preg_split('/\s+/', $search, -1, PREG_SPLIT_NO_EMPTY);
+        $postulantes = Postulante::query()
+            ->with(['universidad', 'pasantia', 'persona'])
+            ->whereHas('persona', function ($query) use ($words) {
+                foreach ($words as $value) {
+                    $query->where('nombres', 'ilike', "%$value%")
+                        ->orWhere('primer_apellido', 'ilike', "%$value%")
+                        ->orWhere('segundo_apellido', 'ilike', "%$value%")
+                        ->orWhere('ci', 'ilike', "%$value%")
+                        ->orWhere('expedicion', 'ilike', "%$value%");
+                }
+            })->orWhereHas('universidad', function ($query) use ($words) {
+                foreach ($words as $value) {
+                    $query->where('nombre', 'ilike', "%$value%");
+                }
+            })
+            ->orWhereHas('pasantia', function ($query) use ($search) {
+                $query->where('tipo', 'ilike', "%$search%");
+            })
+            ->orderByDesc('id')
+            ->paginate(5);
         return $postulantes;
     }
 
@@ -34,9 +55,9 @@ class PostulantesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {   
+    {
         try {
-            DB::transaction(function () use ($request){
+            DB::transaction(function () use ($request) {
                 $persona = Persona::create([
                     'nombres' => $request->nombres,
                     'primer_apellido' => $request->primer_apellido,
@@ -52,7 +73,7 @@ class PostulantesController extends Controller
                     'numero_referencia' => $request->numero_referencia,
                     'nombre_referencia' => $request->nombre_referencia,
                 ]);
-    
+
                 Postulante::create([
                     'id' => $persona->id,
                     'tipo_postulante' => $request->tipo_postulante,
@@ -60,7 +81,7 @@ class PostulantesController extends Controller
                     'carrera' => $request->carrera,
                     'id_universidad' => $request->id_universidad,
                     'id_pasantia' => $request->id_pasantia,
-    
+
                 ]);
                 $tipoDoc =  DB::table('tipo_documento')->where('nombre', 'DOCUMENTOS DEL POSTULANTE')->value('id');
                 $pdfMerger = PDFMerger::init();
@@ -89,23 +110,22 @@ class PostulantesController extends Controller
                     $pdfMerger->addPDF($doc_cerificadoEgreso, 'all');
                 }
                 $pdfMerger->merge();
-                $content = $pdfMerger->save($persona->id.'pdf', 'string');
+                $content = $pdfMerger->save($persona->id . 'pdf', 'string');
                 $nombre = Str::uuid();
-                Storage::disk('public')->put('filePersonal/'.$persona->ci.'/'.$nombre.'.pdf', $content);
-                $ruta = Storage::url('filePersonal/'.$persona->ci.'/'.$nombre.'.pdf');
+                Storage::disk('public')->put('filePersonal/' . $persona->ci . '/' . $nombre . '.pdf', $content);
+                $ruta = Storage::url('filePersonal/' . $persona->ci . '/' . $nombre . '.pdf');
                 Documento::create([
                     'nombre' => $nombre,
                     'ruta' => $ruta,
                     'id_persona' => $persona->id,
                     'id_tipo_documento' => $tipoDoc
-                ]);    
+                ]);
             });
         } catch (\Exception $e) {
             return response()->json(['message' => 'error']);
         }
 
         return response()->json(['message' => 'success']);
-
     }
 
     /**
