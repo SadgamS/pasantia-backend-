@@ -20,11 +20,51 @@ class PersonaController extends Controller
         return $personas;
     }
 
-    public function selected(){
-        $personas = DB::table('persona')->select('id', 'primer_nombre', 'segundo_nombre', 'apellido_paterno', 'apellido_materno', 'ci', 'extension')
-                                        ->get();
+    public function selected(Request $request)
+    {
+        $search = $request->input('search');
+        $words = preg_split('/\s+/', $search, -1, PREG_SPLIT_NO_EMPTY);
+        $personas = DB::table('persona')->select('id', 'nombres', 'primer_apellido', 'segundo_apellido', 'ci', 'expedicion')
+            ->when($search, function ($query) use ($words) {
+                foreach ($words as $value) {
+                    $query->where('nombres', 'ilike', "$value%")
+                        ->orWhere('primer_apellido', 'ilike', "$value%")
+                        ->orWhere('segundo_apellido', 'ilike', "$value%");
+                }
+            })
+            ->limit(10)
+            ->orderByDesc('id')
+            ->get();
         return $personas;
-    }   
+    }
+
+    public function postulantes()
+    {
+        $postulantes = DB::table('persona')
+            ->join('postulante', 'persona.id', '=', 'postulante.id')
+            ->limit(10)
+            ->orderByDesc('id')
+            ->get();
+        return $postulantes;
+    }
+    public function servidor_publico()
+    {
+        $servidor_publico = DB::table('persona')
+            ->join('servidor_publico', 'persona.id', '=', 'servidor_publico.id')
+            ->limit(10)
+            ->orderByDesc('id')
+            ->get();
+        return $servidor_publico;
+    }
+    public function tutor_academico()
+    {
+        $tutor_academico = DB::table('persona')
+            ->join('tutor_academico', 'persona.id', '=', 'tutor_academico.id')
+            ->limit(10)
+            ->orderByDesc('id')
+            ->get();
+        return $tutor_academico;
+    }
 
     /**
      * Store a newly created resource in storage.

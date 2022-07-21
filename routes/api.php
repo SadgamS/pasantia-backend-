@@ -44,5 +44,8 @@ Route::get('/pasantes', [PasanteTrabajoDController::class, 'index']);
 Route::get('/evaluacion_pasantes', [EvaluacionPController::class, 'index']);
 Route::get('/personas', [PersonaController::class, 'index']);
 Route::get('/personas/users', [PersonaController::class, 'selected']);
+Route::get('/personas/postulantes', [PersonaController::class, 'postulantes']);
+Route::get('/personas/servidor-publico', [PersonaController::class, 'servidor_publico']);
+Route::get('/personas/tutor-academico', [PersonaController::class, 'tutor_academico']);
 Route::get('/convocatorias/{tipo}', [PasantiaTrabajoDirigidoController::class, 'convocatorias']);
 Route::post('/postulantes/crear', [PostulantesController::class, 'store']);
