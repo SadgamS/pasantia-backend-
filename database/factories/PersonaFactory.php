@@ -19,8 +19,7 @@ class PersonaFactory extends Factory
         return [
             //
             'nombres' => $this->faker->name(),
-            'primer_apellido' => $this->faker->lastName(),
-            'segundo_apellido' => $this->faker->lastName(),
+            'apellidos' => $this->faker->lastName(),
             'ci' => $this->faker->numerify('#########'),
             'expedicion' => $this->faker->randomElement(['LP','SC','CBBA', 'OR','PTS','TR','PD']),
             'genero' => $this->faker->randomElement(['M', 'F']),

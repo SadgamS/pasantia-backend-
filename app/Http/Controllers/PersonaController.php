@@ -24,12 +24,11 @@ class PersonaController extends Controller
     {
         $search = $request->input('search');
         $words = preg_split('/\s+/', $search, -1, PREG_SPLIT_NO_EMPTY);
-        $personas = DB::table('persona')->select('id', 'nombres', 'primer_apellido', 'segundo_apellido', 'ci', 'expedicion')
+        $personas = DB::table('persona')->select('id', 'nombres', 'apellidos', 'ci', 'expedicion')
             ->when($search, function ($query) use ($words) {
                 foreach ($words as $value) {
                     $query->where('nombres', 'ilike', "$value%")
-                        ->orWhere('primer_apellido', 'ilike', "$value%")
-                        ->orWhere('segundo_apellido', 'ilike', "$value%");
+                        ->orWhere('apellidos', 'ilike', "$value%");
                 }
             })
             ->limit(10)
