@@ -24,8 +24,7 @@ class TutorAcademicoFactory extends Factory
         return [
             //
             'id' => Persona::factory(),
-            'grado_academico' => $this->faker->randomElement(['Licenciado', 'Magister']),
-            'email' => $this->faker->safeEmail(),
+            'nivel_academico' => $this->faker->randomElement(['Licenciado', 'Magister']),
             'id_universidad' => $this->faker->randomElement($universidad),
 
             // 'id_user' => function (array $attributes) {

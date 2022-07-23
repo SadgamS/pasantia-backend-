@@ -9,6 +9,7 @@ class ServidorPublico extends Model
 {
     use HasFactory;
     protected $table = 'servidor_publico';
+    protected $fillable = ['id', 'formacion_academica', 'nivel_academico', 'id_unidad'];
 
 
     public function unidad()

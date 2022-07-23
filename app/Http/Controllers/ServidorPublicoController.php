@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Persona;
 use App\Models\ServidorPublico;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ServidorPublicoController extends Controller
 {
@@ -16,17 +18,14 @@ class ServidorPublicoController extends Controller
     {
         //
         $search = $request->input('search');
-        $words = preg_split('/\s+/', $search, -1, PREG_SPLIT_NO_EMPTY);
+
         $servidorPublico = ServidorPublico::query()
             ->with(['persona', 'unidad'])
-            ->whereHas('persona', function ($query) use ($words) {
-                foreach ($words as $value) {
-                    $query->where('nombres', 'ilike', "%$value%")
-                        ->orWhere('primer_apellido', 'ilike', "%$value%")
-                        ->orWhere('segundo_apellido', 'ilike', "%$value%")
-                        ->orWhere('ci', 'ilike', "%$value%")
-                        ->orWhere('expedicion', 'ilike', "%$value%");
-                }
+            ->whereHas('persona', function ($query) use ($search) {
+                $query->where('nombres', 'ilike', "%$search%")
+                    ->orWhere('apellidos', 'ilike', "%$search%")
+                    ->orWhere('ci', 'ilike', "%$search%")
+                    ->orWhere('expedicion', 'ilike', "%$search%");
             })->orWhere('formacion_academica', 'ilike', "%$search%")
             ->orWhere('nivel_academico', 'ilike', "%$search%")
             ->orderByDesc('id')
@@ -43,6 +42,33 @@ class ServidorPublicoController extends Controller
     public function store(Request $request)
     {
         //
+        try {
+            DB::transaction(function () use($request){
+                $persona = Persona::create([
+                    'nombres' => $request->nombres,
+                    'apellidos' => $request->apellidos,
+                    'ci' => $request->ci,
+                    'expedicion' => $request->expedicion,
+                    'genero' => $request->genero,
+                    'fecha_nacimiento' => $request->fecha_nacimiento,
+                    'domicilio' => $request->domicilio,
+                    'ciudad' => $request->ciudad,
+                    'correo' => $request->correo,
+                    'celular' => $request->celular,
+                    'numero_referencia' => $request->numero_referencia,
+                    'nombre_referencia' => $request->nombre_referencia,
+                ]);
+                ServidorPublico::create([
+                    'id' => $persona->id,
+                    'formacion_academica' => $request->formacion_academica,
+                    'nivel_academico' => $request->nivel_academico,
+                    'id_unidad' => $request->id_unidad
+                ]);
+            });
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'error']);
+        }
+        return response()->json(['message' => 'success']);
     }
 
     /**

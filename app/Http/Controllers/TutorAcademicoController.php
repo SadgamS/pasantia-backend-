@@ -12,11 +12,22 @@ class TutorAcademicoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
-        $tutoresAcademicos = TutorAcademico::with(['user','user.rol','universidad'])->get();
+        $search = $request->input('search');
 
+        $tutoresAcademicos = TutorAcademico::query()
+            ->with(['persona', 'universidad'])
+            ->whereHas('persona', function ($query) use ($search) {
+                $query->where('nombres', 'ilike', "%$search%")
+                    ->orWhere('apellidos', 'ilike', "%$search%")
+                    ->orWhere('ci', 'ilike', "%$search%")
+                    ->orWhere('expedicion', 'ilike', "%$search%");
+            })
+            ->orWhere('nivel_academico', 'ilike', "%$search%")
+            ->orderByDesc('id')
+            ->paginate(5);
         return $tutoresAcademicos;
     }
 

@@ -15,8 +15,7 @@ return new class extends Migration
     {
         Schema::create('tutor_academico', function (Blueprint $table) {
             $table->integer('id'); 
-            $table->string('grado_academico');  
-            $table->string('email');  
+            $table->string('nivel_academico');  
             $table->primary('id');      
             $table->foreign('id')->references('id')->on('persona');     
             $table->foreignId('id_universidad')->constrained('universidad');      

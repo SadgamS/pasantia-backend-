@@ -10,11 +10,11 @@ class TutorAcademico extends Model
     use HasFactory;
     protected $table='tutor_academico';
 
-    public function user(){
-        return $this->hasOne(User::class, 'id', 'id_user');
+    public function persona(){
+        return $this->hasOne(Persona::class, 'id', 'id');
     }
 
     public function universidad(){
-        return $this->belongsTo(Universidad::class, 'id_universidad', 'id');
+        return $this->hasOne(Universidad::class, 'id' ,'id_universidad');
     }
 }
